@@ -1,0 +1,17 @@
+*.log
+*.lck
+.idea
+.swp
+.epoch
+.iml
+target
+.bak
+*.log
+*.lck
+.idea
+*.swp
+*.epoch
+*.iml
+target
+*.bak
+*.class
