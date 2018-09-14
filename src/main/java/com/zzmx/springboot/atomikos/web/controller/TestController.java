@@ -1,27 +1,28 @@
 package com.zzmx.springboot.atomikos.web.controller;
 
+import com.zzmx.springboot.atomikos.web.service.ITestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/test")
 public class TestController {
 
-	@Autowired
-	private JdbcTemplate sysJdbcTemplate;
+    @Autowired
+    private ITestService testService;
 
-	@Autowired
-	private JdbcTemplate busJdbcTemplate;
+    @Transactional
+    @RequestMapping("ok")
+    public String test() {
+        return testService.ok();
+    }
 
-	@Transactional
-	@RequestMapping("")
-	public void test() {
-		System.out.println("begin.....");
-		sysJdbcTemplate.execute("insert into sys_a(id) values(1)");
-		busJdbcTemplate.execute("insert into bus_b(id) values(2)");
-		System.out.println("end.....");
-	}
+
+    @Transactional
+    @RequestMapping("fail")
+    public String failTest() {
+        return testService.fail();
+    }
 }
